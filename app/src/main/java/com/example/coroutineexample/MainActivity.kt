@@ -1,5 +1,6 @@
 package com.example.coroutineexample
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,7 +22,12 @@ class MainActivity : AppCompatActivity() {
         val cancelandjoinbtn=findViewById<Button>(R.id.cancel_and_join)
         val timeoutbtn=findViewById<Button>(R.id.timeout)
         val timeoutOrNullbtn=findViewById<Button>(R.id.timeout_or_null)
+        val next=findViewById<Button>(R.id.next)
 
+        next.setOnClickListener {
+            val intent= Intent(this,ComposingSuspendFunctionActivity::class.java)
+            startActivity(intent)
+        }
 
         isactivebtn.setOnClickListener {
             runBlocking {
@@ -52,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         cancelandjoinbtn.setOnClickListener {
-
             runBlocking {
                 try{
                     val job:Job=GlobalScope.launch {
@@ -74,7 +79,6 @@ class MainActivity : AppCompatActivity() {
 
                 println("Currently running in ${Thread.currentThread().name}")
             }
-
         }
 
         timeoutbtn.setOnClickListener {
